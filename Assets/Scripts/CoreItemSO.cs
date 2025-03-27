@@ -11,5 +11,5 @@ public class CoreItemSO : ScriptableObject
     public Sprite icon;
     public bool isPickable;
     public string description;
-    public int slotPosition;
+    //public int slotPosition;
 }

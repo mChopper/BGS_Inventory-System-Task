@@ -15,21 +15,10 @@ public class PlayerInventory : MonoBehaviour
     public GameObject[] equipmentItems = new GameObject[3];
     public GameObject[] equipmentUISlots = new GameObject[3];
     
-    [Header("Mouse Functions")]
-    public GameObject itemOnMouseCursor;
-    public GameObject inventorySlotOnMouseCursor;
-    public GameObject equipmentSlotOnMouseCursor;
-    public GameObject grabbedItem;
-    public bool isHovering;
-    public bool isClicking;
-    public bool  isDragging;
-    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isDragging = false;
-        isHovering = false;
-        isClicking = false;
+
     }
 
     // Update is called once per frame
@@ -37,8 +26,23 @@ public class PlayerInventory : MonoBehaviour
     {
        
     }
-    
-    [SerializeField] PlayerInventory playerInventory;
+
+    public void InventoryUIUpdate()
+    {
+        //inventoryUISlots = new GameObject[9];
+        for (int i = 0; i < inventoryItems.Length; i++)
+        {
+            if (inventoryItems[i] != null) {
+                inventoryUISlots[i].GetComponent<Image>().sprite = inventoryItems[i].GetComponent<CoreItem>().data.icon;
+                inventoryUISlots[i].GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                inventoryUISlots[i].GetComponent<Image>().sprite = null;
+                inventoryUISlots[i].GetComponent<Image>().enabled = false;
+            }
+        }
+    }
     public bool AddItem(GameObject item)
     {
         SpriteRenderer spriteUI;
@@ -53,7 +57,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 inventoryItems[i] = item.GetComponent<CoreItem>().data.prefab;
                 inventoryUISlots[i].GetComponent<Image>().sprite = item.GetComponent<CoreItem>().data.icon;
-                inventoryUISlots[i].GetComponent<Image>().color = Color.HSVToRGB(1,1,1,true);
+                inventoryUISlots[i].GetComponent<Image>().enabled = true;
                 itemPicked = true;
                 Debug.Log("Picked item");
                 

@@ -1,48 +1,65 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
-    public PlayerInventory inventory;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    public PlayerInventory playerInventory;
+    public GameObject controls;
+    public GameObject helpMessage;
+    private bool isHelpOn;
 
-    }
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        isHelpOn = false;   
+        LoadData();
     }
 
     public void SaveData()
     {
-        foreach (var go in inventory.inventoryItems)
+        PlayerPrefs.DeleteAll();
+        //playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
+
+        for (int i = 0; i < playerInventory.inventoryItems.Length; i++)
         {
-            PlayerPrefs.SetString("Item", go.GetComponent<CoreItemSO>().name);
-            //PlayerPrefs.SetString("Slot", go.GetComponent<CoreItemSO>().slotPosition);
-            PlayerPrefs.SetString("Prefab", go.GetComponent<CoreItemSO>().prefabName );
+            if (playerInventory.inventoryItems[i])
+            {
+                PlayerPrefs.SetString("Prefab" + i, playerInventory.inventoryItems[i].name);
+                PlayerPrefs.SetInt("Slot" + i, i);
+            }
         }
+        Debug.Log("Game Saved");
     }
     public void LoadData()
     {
-        PlayerPrefs.DeleteAll();
-        for (int i = 0; i < inventory.inventoryItems.Length; i++)
+        for (int i = 0; i < playerInventory.inventoryItems.Length; i++)
         {
-            var slot = PlayerPrefs.GetInt("Slot");
-            var prefab = PlayerPrefs.GetString("Prefab");
+            string prefab = PlayerPrefs.GetString("Prefab" + i);
             
-            GameObject obj = (GameObject)Resources.Load("Prefabs/" + prefab);
-            
-            Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity);
-            
-            //inventory.inventoryUI = Instantiate(PlayerPrefs.GetString("Item"));
-  
-        }   
+            playerInventory.inventoryItems[i] = Resources.Load<GameObject>("Prefabs/" + prefab);
+        } 
+        playerInventory.InventoryUIUpdate();
+        Debug.Log("Game Loaded");
     }
 
+    public void DisplayControls()
+    {
+        controls.SetActive(!isHelpOn);
+        helpMessage.SetActive(isHelpOn);
+        isHelpOn = !isHelpOn;
+    }
     public void ResetGame()
     {
-        //inventory.items.Clear();
+        SceneManager.LoadScene( SceneManager.GetActiveScene().name );
+    }
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+    
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
