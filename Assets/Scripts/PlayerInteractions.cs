@@ -51,11 +51,8 @@ public class PlayerInteractions : MonoBehaviour
     {
         for (int i = 0; i < itemsCollidedWith.Count; i++)
         {
-            Debug.Log(itemsCollidedWith[i]);
             if (isTouching)
             {
-                Debug.Log(itemsCollidedWith);
-                Debug.Log(itemsCollidedWith[i]);
                 bool item = playerInventory.AddItem(itemsCollidedWith[i]);
                 if (item)
                 {

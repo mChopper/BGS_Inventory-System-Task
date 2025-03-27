@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject controls;
     public GameObject helpMessage;
     private bool isHelpOn;
+    private bool isLoading;
 
     private void Start()
     {
@@ -33,13 +34,15 @@ public class GameManager : MonoBehaviour
     }
     public void LoadData()
     {
+        isLoading = true;
         for (int i = 0; i < playerInventory.inventoryItems.Length; i++)
         {
+            //GameObject go = playerInventory.inventoryUISlots[i].transform.GetChild(0).gameObject;
+            //Destroy(go);
             string prefab = PlayerPrefs.GetString("Prefab" + i);
-            
             playerInventory.inventoryItems[i] = Resources.Load<GameObject>("Prefabs/" + prefab);
         } 
-        playerInventory.InventoryUIUpdate();
+        playerInventory.InventoryUIUpdate(isLoading);
         Debug.Log("Game Loaded");
     }
 

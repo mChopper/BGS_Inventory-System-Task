@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour
 {
     public GameObject inventoryUI;
+    public GameObject itemPrefab;
 
     public GameObject[] inventoryItems = new GameObject[9];
     public GameObject[] inventoryUISlots = new GameObject[9];
@@ -27,20 +28,70 @@ public class PlayerInventory : MonoBehaviour
        
     }
 
-    public void InventoryUIUpdate()
+    public void InventoryDataUpdate ()
+    {        
+        Debug.Log("F InventoryDATAUpdate");
+        for (int i = 0; i < inventoryItems.Length; i++)
+        {
+            
+        }
+        for (int i = 0; i < inventoryUISlots.Length; i++)
+        {
+            if (inventoryUISlots[i].transform.childCount != 0) {
+                //GameObject item = Instantiate(inventoryUISlots[i]., inventoryUISlots[i].transform);
+                GameObject go = inventoryUISlots[i].transform.GetChild(0).gameObject;
+                Debug.Log(go.name);
+                //go.GetComponent<CoreItemSO>().name;
+                var path = "Prefabs/" + go.GetComponent<CoreItem>().data.prefabName;
+                inventoryItems[i] = Resources.Load<GameObject>(path);
+                //Debug.Log(inventoryItems[i].name);
+                    //inventoryUISlots[i].transform.GetChild(0).gameObject;
+                //item.GetComponent<Image>().sprite = inventoryItems[i].GetComponent<CoreItem>().data.icon;
+                //item.GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                //inventoryItems[i] = null;
+                //inventoryUISlots[i].GetComponent<Image>().sprite = null;
+                //inventoryUISlots[i].GetComponent<Image>().enabled = false;
+            }
+        }
+        Debug.Log("F InventoryDATAUpdate");
+    }
+    public void InventoryUIUpdate(bool isLoadingState)
     {
+        Debug.Log("Star InventoryUIUpdate");
+        for (int i = 0; i < inventoryUISlots.Length; i++)
+        {
+            int isItemInSlot = inventoryUISlots[i].transform.childCount;
+            if (isItemInSlot > 0)
+            {
+                Destroy(inventoryUISlots[i].transform.GetChild(0).gameObject);
+            }
+        }
+
         //inventoryUISlots = new GameObject[9];
         for (int i = 0; i < inventoryItems.Length; i++)
         {
             if (inventoryItems[i] != null) {
-                inventoryUISlots[i].GetComponent<Image>().sprite = inventoryItems[i].GetComponent<CoreItem>().data.icon;
-                inventoryUISlots[i].GetComponent<Image>().enabled = true;
+                GameObject item = Instantiate(inventoryItems[i], inventoryUISlots[i].transform);
+                if (item.transform.childCount != 0)
+                {
+                    item.transform.GetChild(0).gameObject.SetActive(true);
+                }
+                //item.GetComponent<Image>().sprite = inventoryItems[i].GetComponent<CoreItem>().data.icon;
+                //item.GetComponent<Image>().enabled = true;
             }
             else
             {
-                inventoryUISlots[i].GetComponent<Image>().sprite = null;
-                inventoryUISlots[i].GetComponent<Image>().enabled = false;
+                //inventoryUISlots[i].GetComponent<Image>().sprite = null;
+                //inventoryUISlots[i].GetComponent<Image>().enabled = false;
             }
+        }
+        Debug.Log("F InventoryUIUpdate");
+        if (!isLoadingState)
+        {
+            InventoryDataUpdate();
         }
     }
     public bool AddItem(GameObject item)
@@ -56,13 +107,11 @@ public class PlayerInventory : MonoBehaviour
             else
             {
                 inventoryItems[i] = item.GetComponent<CoreItem>().data.prefab;
-                inventoryUISlots[i].GetComponent<Image>().sprite = item.GetComponent<CoreItem>().data.icon;
-                inventoryUISlots[i].GetComponent<Image>().enabled = true;
+                //inventoryUISlots[i].GetComponent<Image>().sprite = item.GetComponent<CoreItem>().data.icon;
+                //inventoryUISlots[i].GetComponent<Image>().enabled = true;
                 itemPicked = true;
                 Debug.Log("Picked item");
-                
-                //Instantiate(inventoryItems[i], inventorySlots[i].transform.position, inventoryItems[i].transform.rotation);
-                //Instantiate(inventoryItems[i], inventorySlots[i], Quaternion.identity);
+                InventoryUIUpdate(itemPicked);
                 return itemPicked;
             }
         }
