@@ -9,6 +9,8 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private KeyCode left = KeyCode.A;
     [SerializeField] private KeyCode right = KeyCode.D;
     [SerializeField] private KeyCode openInventory = KeyCode.Tab;
+    [SerializeField] private KeyCode useItem = KeyCode.Mouse0;
+    [SerializeField] private KeyCode removeItem = KeyCode.Mouse1;
     [SerializeField] private KeyCode saveGame = KeyCode.F5;
     [SerializeField] private KeyCode loadGame = KeyCode.F7;
     [SerializeField] private KeyCode deleteSave = KeyCode.Delete;
@@ -20,6 +22,7 @@ public class PlayerInput : MonoBehaviour
     public GameManager gameManager;
     public PlayerMovement playerMovement;
     public PlayerInteractions playerInteractions;
+    public PlayerInventory playerInventory;
     
     
     public void HandleInput()

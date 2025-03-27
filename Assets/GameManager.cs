@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     public void SaveData()
     {
         PlayerPrefs.DeleteAll();
-        //playerInventory = GameObject.Find("Player").GetComponent<PlayerInventory>();
 
         for (int i = 0; i < playerInventory.inventoryItems.Length; i++)
         {
@@ -30,20 +29,16 @@ public class GameManager : MonoBehaviour
                 PlayerPrefs.SetInt("Slot" + i, i);
             }
         }
-        Debug.Log("Game Saved");
     }
     public void LoadData()
     {
         isLoading = true;
         for (int i = 0; i < playerInventory.inventoryItems.Length; i++)
         {
-            //GameObject go = playerInventory.inventoryUISlots[i].transform.GetChild(0).gameObject;
-            //Destroy(go);
             string prefab = PlayerPrefs.GetString("Prefab" + i);
             playerInventory.inventoryItems[i] = Resources.Load<GameObject>("Prefabs/" + prefab);
         } 
         playerInventory.InventoryUIUpdate(isLoading);
-        Debug.Log("Game Loaded");
     }
 
     public void DisplayControls()

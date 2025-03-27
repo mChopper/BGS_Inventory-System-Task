@@ -8,13 +8,13 @@ public class DraggableUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public Transform inventory; 
     public Transform afterDrag;
     public Transform itemContainer;
-    public Transform originalItemContainerPosition;
+    public Transform currentSlot;
     
     public void Start()
     {
         itemContainer = transform.parent;
+        currentSlot = transform.parent.transform.parent;
         inventory = itemContainer.parent.transform.parent.transform.parent;
-        originalItemContainerPosition = transform.parent;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -35,6 +35,7 @@ public class DraggableUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         itemContainer.transform.SetParent(afterDrag);
         transform.SetParent(itemContainer);
         itemContainer.transform.position = afterDrag.position;
+        currentSlot = transform.parent.transform.parent;
         itemContainer.transform.localPosition = Vector3.zero; 
         GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
         image.raycastTarget = true;

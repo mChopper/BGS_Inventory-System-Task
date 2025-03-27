@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2698797343740903655}
   - component: {fileID: 4798162298762472146}
   - component: {fileID: 4810831355605696665}
+  - component: {fileID: -6778426059782522455}
   m_Layer: 0
   m_Name: Red Orb
   m_TagString: Untagged
@@ -247,6 +248,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6778426059782522455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990704367547166302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3132b0ae5554db46a17461b30beccf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemOnMouseCursor: {fileID: 0}
+  descriptionUI: {fileID: 0}
+  itemName: {fileID: 0}
+  itemDescription: {fileID: 0}
+  isHovering: 0
+  isClicking: 0
+  isDragging: 0
 --- !u!1 &6588322283256274841
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,5 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 4682760393038693879}
-  parentOfItem: {fileID: 0}
-  newParent: {fileID: 0}
+  inventory: {fileID: 0}
+  afterDrag: {fileID: 0}
+  itemContainer: {fileID: 0}
+  originalItemContainerPosition: {fileID: 0}
