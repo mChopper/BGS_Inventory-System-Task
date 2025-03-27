@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: WaterSplash
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 21300000, guid: 4e39cfa847204447dbb1bee136a4cad7, type: 3}
+  - {fileID: 21300000, guid: 45a6295af493c45cab251f994a810e62, type: 3}
+  - {fileID: 21300000, guid: ae93a3948ba2947b0a2f59bf2102469f, type: 3}
+  - {fileID: 21300000, guid: 791c26f485ca1458e9675b66963f94bf, type: 3}
+  - {fileID: 21300000, guid: cb495bb44a85f47989fb3e9f546cb35e, type: 3}
+  - {fileID: 21300000, guid: 15066080f65de4612a6ddd1dcc3d3ac1, type: 3}
+  - {fileID: 21300000, guid: 9d72b9e4126874922a8219d995e5d89a, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0
