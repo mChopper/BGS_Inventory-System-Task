@@ -1,20 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
-
 public class PlayerInventory : MonoBehaviour
 {
     public GameObject inventoryUI;
     public GameObject itemPrefab;
 
-    public GameObject[] inventoryItems = new GameObject[9];
-    public GameObject[] inventoryUISlots = new GameObject[9];
-    public GameObject[] equipmentItems = new GameObject[3];
-    public GameObject[] equipmentUISlots = new GameObject[3];
+    public GameObject[] inventoryItems = new GameObject[12];
+    public GameObject[] inventoryUISlots = new GameObject[12];
 
     public void InventoryDataUpdate ()
     { 
@@ -39,7 +31,6 @@ public class PlayerInventory : MonoBehaviour
                 Destroy(inventoryUISlots[i].transform.GetChild(0).gameObject);
             }
         }
-
        
         for (int i = 0; i < inventoryItems.Length; i++)
         {
@@ -56,15 +47,13 @@ public class PlayerInventory : MonoBehaviour
         {
             InventoryDataUpdate();
         }
-        else
-        {
-        }
+        
     }
     public bool AddItem(GameObject item)
     {
         bool itemPicked = false;
         
-        for (int i = 0; i < inventoryItems.Length; i++)
+        for (int i = 3; i < inventoryItems.Length; i++)
         {
             if (inventoryItems[i])
             {
@@ -91,6 +80,18 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log("Using Item");
     }
     public void RemoveItem(GameObject item) {
+        
         Debug.Log("Removing Item");
+        Debug.Log(item);
+        
+        string slotName = item.gameObject.GetComponent<DraggableUIItem>().currentSlot.gameObject.name;
+        slotName = slotName.Substring(5, 2);
+        Debug.Log(slotName);
+        int slotNumber = Int32.Parse(slotName);
+        Debug.Log(slotNumber);
+        
+        Destroy(inventoryUISlots[slotNumber - 1].transform.GetChild(0).gameObject);
+        inventoryItems[slotNumber - 1] = null;
+        InventoryUIUpdate(true);
     }
 }

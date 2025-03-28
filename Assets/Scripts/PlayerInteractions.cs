@@ -50,4 +50,12 @@ public class PlayerInteractions : MonoBehaviour
             playerInventory.inventoryUI.SetActive(true);
         }
     }
+
+    public void UseItem()
+    {
+        if (playerInventory.inventoryItems[0])
+        {
+            
+        }
+    }
 }

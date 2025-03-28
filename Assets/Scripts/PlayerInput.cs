@@ -22,7 +22,6 @@ public class PlayerInput : MonoBehaviour
     public GameManager gameManager;
     public PlayerMovement playerMovement;
     public PlayerInteractions playerInteractions;
-    public PlayerInventory playerInventory;
     
     
     public void HandleInput()
@@ -37,6 +36,11 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(openInventory))
         {
             playerInteractions.OpenInventoryUI();
+        }
+
+        if (Input.GetKeyDown(useItem))
+        {
+            playerInteractions.UseItem();
         }
 
         if (Input.GetKeyDown(saveGame))

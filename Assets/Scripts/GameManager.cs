@@ -10,13 +10,11 @@ public class GameManager : MonoBehaviour
     public GameObject helpMessage;
     private bool isHelpOn;
     private bool isLoading;
-
     private void Start()
     {
         isHelpOn = false;   
         LoadData();
     }
-
     public void SaveData()
     {
         PlayerPrefs.DeleteAll();
