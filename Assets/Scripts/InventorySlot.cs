@@ -18,6 +18,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         if (transform.childCount == 0)
         {
+            Debug.Log(gameObject);
             if ((gameObject.transform.name == "Slot_01") && (eventData.pointerDrag.gameObject.CompareTag("Weapon")))
             {
                 Debug.Log("Weapon Slot");
@@ -38,6 +39,21 @@ public class InventorySlot : MonoBehaviour, IDropHandler
                 Debug.Log("Free Inv Slot");
                 HandleDrop(eventData);
             }
+        }
+        else
+        {
+            if(gameObject.CompareTag("InventorySlot"))
+            {
+                GameObject dropped = eventData.pointerDrag;
+                DraggableUIItem draggableUIItem = dropped.GetComponent<DraggableUIItem>();
+                draggableUIItem.itemContainer.transform.localPosition = Vector3.zero; 
+                draggableUIItem.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+            }
+            
+            // if (draggableUIItem.)
+            //Debug.Log("Contains Item");
+            //Debug.Log("Container" + draggableUIItem.itemContainer.transform.localPosition);
+            // Debug.Log("Draggable" + draggableUIItem.GetComponent<RectTransform>().anchoredPosition);
         }
     }
     public void HandleDrop(PointerEventData eventData)

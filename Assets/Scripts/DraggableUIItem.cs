@@ -36,6 +36,8 @@ public class DraggableUIItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         transform.SetParent(itemContainer);
         itemContainer.transform.position = afterDrag.position;
         currentSlot = transform.parent.transform.parent;
+        itemContainer.transform.localPosition = Vector3.zero; 
+        GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
         image.raycastTarget = true;
     }
 }
